@@ -81,7 +81,7 @@ function randomImage() {
     secondImg.removeEventListener('click', handleImageClick);
     thirdImg.removeEventListener('click', handleImageClick);
     displayResults();  
-    localStorage.setItem('productVotes', JSON.stringify(allProducts));  
+      
   }
 
 }
@@ -105,6 +105,10 @@ randomImage();
   for (var j = 0; j < allProducts.length; j++) {
     votes.push(allProducts[j].votes);
   }
+  var views = [];
+  for (var j = 0; j < allProducts.length; j++) {
+    views.push(allProducts[j].views);
+  }
 
   var colors = [];
   for (var k = 0; k < allProducts.length; k++) {
@@ -115,10 +119,14 @@ randomImage();
     type: 'bar',
     data: {
       labels: names,
-      datasets: [{
-        label: '# of Votes',
+      datasets: [{ 
+         label: '# of Votes',
         data: votes,
-        backgroundColor: colors,
+        backgroundColor: colors
+      },{ label: '# of views',
+        data: views,
+        backgroundColor: colors
+
       }]
     },
     options: {
