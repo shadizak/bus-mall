@@ -1,24 +1,33 @@
+
 'use strict';
 
-var totalClicks = 0;
+ 
+var ctx = document.getElementById("myChart").getContext('2d');
+var totalClicks = 0;  
 var firstImg = document.getElementById('first');
 var secondImg = document.getElementById('second');
 var thirdImg = document.getElementById('third');
-var results = document.getElementById('results');
-var lastShownImages = [];
+ 
+var lastShownImages = []; 
 
-var allProducts = [];
-
-function Product(name, imgPath) {
-
-  this.name = name;
+ var allProducts = [];
+ function Product(name, imgPath) {
+   this.name = name;
   this.imgPath = imgPath;
-  this.views = 0;
-  this.votes = 0;
-  allProducts.push(this);
-}
+  this.views = 0;  
+  this.votes = 0;  
 
-new Product('bag', 'img/assets/bag.jpg');
+  var cOne = Math.floor(Math.random() * 255);
+  var cTwo = Math.floor(Math.random() * 255);
+  var cThree = Math.floor(Math.random() * 255);
+
+  this.bgColor = `rgba(${cOne}, ${cTwo}, ${cThree}, 0.2)`;
+  allProducts.push(this);  
+}
+if (localStorage.productVotes) {  
+  allProducts = JSON.parse(localStorage.getItem('productVotes')); 
+ } else {
+  new Product('bag', 'img/assets/bag.jpg');
 new Product('banana', 'img/assets/banana.jpg');
 new Product('bathroom', 'img/assets/bathroom.jpg');
 new Product('boots', 'img/assets/boots.jpg');
@@ -38,13 +47,11 @@ new Product('unicorn', 'img/assets/unicorn.jpg');
 new Product('usb', 'img/assets/usb.gif');
 new Product('water-can', 'img/assets/water-can.jpg');
 new Product('wine-glass', 'img/assets/wine-glass.jpg');
-console.log(allProducts);
-
+} 
 function randomImage() {
   var firstRandom = Math.floor(Math.random() * allProducts.length);
   var secondRandom = Math.floor(Math.random() * allProducts.length);
   var thirdRandom = Math.floor(Math.random() * allProducts.length);
-
  
   while (firstRandom === secondRandom || firstRandom === thirdRandom || secondRandom === thirdRandom || lastShownImages.includes(firstRandom) || lastShownImages.includes(secondRandom) || lastShownImages.includes(thirdRandom)) {
     firstRandom = Math.floor(Math.random() * allProducts.length);
@@ -56,52 +63,77 @@ function randomImage() {
   lastShownImages[1] = secondRandom;
   lastShownImages[2] = thirdRandom;
 
-  console.log(lastShownImages);
-
   firstImg.src = allProducts[firstRandom].imgPath;
   secondImg.src = allProducts[secondRandom].imgPath;
   thirdImg.src = allProducts[thirdRandom].imgPath;
 
-  
-  firstImg.alt = allProducts[firstRandom].name;
+   firstImg.alt = allProducts[firstRandom].name;
   secondImg.alt = allProducts[secondRandom].name;
   thirdImg.alt = allProducts[thirdRandom].name;
-  console.log(firstImg);
 
-
-  allProducts[firstRandom].views++;
+   allProducts[firstRandom].views++;
   allProducts[secondRandom].views++;
   allProducts[thirdRandom].views++;
 
-
-  totalClicks++;
-  console.log(totalClicks);
-  if (totalClicks === 25) {
+   totalClicks++;
+   if (totalClicks === 25) {
     firstImg.removeEventListener('click', handleImageClick);
     secondImg.removeEventListener('click', handleImageClick);
     thirdImg.removeEventListener('click', handleImageClick);
-    displayResults();
+    displayResults();  
+    localStorage.setItem('productVotes', JSON.stringify(allProducts));  
   }
+
 }
-function handleImageClick(event) {
-  console.log(event.target.alt);
-  randomImage();
+ function handleImageClick(event) {
 
   for (var i = 0; i < allProducts.length; i++) {
     if (event.target.alt === allProducts[i].name) {
       allProducts[i].votes++;
     }
   }
+   randomImage();
 }
 randomImage();
-function displayResults() {
-
+ function displayResults() {
+  var names = [];
   for (var i = 0; i < allProducts.length; i++) {
-    var listEl = document.createElement('li');
-    listEl.textContent = allProducts[i].votes + ' votes for the ' + allProducts[i].name + ' and ' + allProducts[i].views + ' views ';
-    results.appendChild(listEl);
+    names.push(allProducts[i].name);
   }
+
+  var votes = [];
+  for (var j = 0; j < allProducts.length; j++) {
+    votes.push(allProducts[j].votes);
+  }
+
+  var colors = [];
+  for (var k = 0; k < allProducts.length; k++) {
+    colors.push(allProducts[k].bgColor);
+  }
+
+  var chartConfig = {
+    type: 'bar',
+    data: {
+      labels: names,
+      datasets: [{
+        label: '# of Votes',
+        data: votes,
+        backgroundColor: colors,
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  };
+
+  return new Chart(ctx, chartConfig);
 }
-firstImg.addEventListener('click', handleImageClick);
+ firstImg.addEventListener('click', handleImageClick);
 secondImg.addEventListener('click', handleImageClick);
 thirdImg.addEventListener('click', handleImageClick);

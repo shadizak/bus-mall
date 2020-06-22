@@ -1,7 +1,14 @@
-img{ height: 250px;
-    width:250px;
-    object-fit:contain; 
-    }
-    #results{
-        margin-left: 20px;
-    }
+body {
+    background-color: #ffffff;
+    text-align: center
+  }
+  
+  img { height: 250px;
+  width:250px;
+  object-fit:contain; 
+  }
+  p{
+    color: blue;
+    font-size: 30px;
+  }
+  
