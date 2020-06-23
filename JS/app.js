@@ -81,7 +81,7 @@ function randomImage() {
     secondImg.removeEventListener('click', handleImageClick);
     thirdImg.removeEventListener('click', handleImageClick);
     displayResults();  
-      
+    localStorage.setItem('productVotes', JSON.stringify(allProducts));   
   }
 
 }
