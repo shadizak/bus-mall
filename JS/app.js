@@ -16,6 +16,7 @@ var lastShownImages = [];
   this.imgPath = imgPath;
   this.views = 0;  
   this.votes = 0;  
+  
 
   var cOne = Math.floor(Math.random() * 255);
   var cTwo = Math.floor(Math.random() * 255);
@@ -81,7 +82,7 @@ function randomImage() {
     secondImg.removeEventListener('click', handleImageClick);
     thirdImg.removeEventListener('click', handleImageClick);
     displayResults();  
-      
+    localStorage.setItem('productVotes', JSON.stringify(allProducts));   
   }
 
 }
