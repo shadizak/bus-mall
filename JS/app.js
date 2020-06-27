@@ -1,31 +1,31 @@
 
 'use strict';
 
- 
+ //Define a variable to store the HTML element
 var ctx = document.getElementById("myChart").getContext('2d');
-var totalClicks = 0;  
-var firstImg = document.getElementById('first');
-var secondImg = document.getElementById('second');
-var thirdImg = document.getElementById('third');
+var totalClicks = 0;//  To calculate the number of possibilities
+var firstImg = document.getElementById('first');//The first place for the first image to appear
+var secondImg = document.getElementById('second');//The second place for the second image to appear
+var thirdImg = document.getElementById('third');//The third place for the third photo to appear
  
-var lastShownImages = []; 
+var lastShownImages = []; //To store the photos that were shown last time
 
- var allProducts = [];
- function Product(name, imgPath) {
+ var allProducts = [];//To store all products
+ function Product(name, imgPath) { //Contractor To add New Product
    this.name = name;
   this.imgPath = imgPath;
-  this.views = 0;  
-  this.votes = 0;  
+  this.views = 0; // # of  views
+  this.votes = 0;  // # of votes
   
 
-  var cOne = Math.floor(Math.random() * 255);
-  var cTwo = Math.floor(Math.random() * 255);
-  var cThree = Math.floor(Math.random() * 255);
+  var cOne = Math.floor(Math.random() * 255);//random color for set to column 
+  var cTwo = Math.floor(Math.random() * 255);//random color for set to column 
+  var cThree = Math.floor(Math.random() * 255);//random color for set to column 
 
   this.bgColor = `rgba(${cOne}, ${cTwo}, ${cThree}, 0.2)`;
   allProducts.push(this);  
 }
-if (localStorage.productVotes) {  
+if (localStorage.productVotes) {  //Check if there are stored products, products are read from them, if no new products are created
   allProducts = JSON.parse(localStorage.getItem('productVotes')); 
  } else {
   new Product('bag', 'img/assets/bag.jpg');
