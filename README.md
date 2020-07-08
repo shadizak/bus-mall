@@ -96,4 +96,4 @@ You are also responsible for the look and feel of the app, so don't forget a cus
 - Upon clicking the 'view results' button, display a list showing each image name and it's corresponding tally of clicks.
 - Don't forget to publish the total amount of clicks (this will be used for a later assignment).
 
-**This is an individual assignment today, but you are free (heck, even encouraged) to collaborate with a classmate if you want. Just be sure that if you do, be sure to make note of that collaboration in your README file.**
+ 
