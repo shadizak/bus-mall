@@ -83,17 +83,8 @@ You are also responsible for the look and feel of the app, so don't forget a cus
  - Object constructor implemented and used properly for creating objects
  - Object literal implemented and used properly for managing the functionality of the app; proper use of methods and properties
 
-## Goals to complete by the start of next lecture
+## Goal
 
-- Create a new repo for this weekly project called **bus-mall** at the root level of your *~/CF/201* directory.
-- Scaffold your repo with the usual README, CSS, JS, and HTML files, plus a *img/* directory.
-- Retrieve the assets from the *assets/* directory in the *class-11* directory of our class repo and place them in your image directory (don't forget to resize the images).
-- The thing you want to build today will select three random photos from the image directory and display them side-by-side-by-side in the browser window.
-- In addition, you'll want to be able to receive clicks on those displayed images, and track those clicks for each image.
-- Upon receiving a click, three new random images need to be automatically displayed.
-- To do this, you'll want a constructor function that creates an object associated with each image, and has properties for the name of the image, its filepath, the number of times it has been shown, and the number of times it has been clicked.
-- After 15 total clicks, disable any further vote functionality, and display a button for the user to view the results.
-- Upon clicking the 'view results' button, display a list showing each image name and it's corresponding tally of clicks.
-- Don't forget to publish the total amount of clicks (this will be used for a later assignment).
+This site acts as a tool for market researchers to know which of their products hold the most interest for customers. Out of their catalog, three items will be displayed to a user, who will choose the item that most interests them out of that group. This will be repeated 25 times, and then the results of the input will be shown. Items will indicate how many times they were chosen, as well as the percentage of how often they were picked when they were shown
 
  
